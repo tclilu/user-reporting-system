@@ -11,7 +11,7 @@ public class User {
     private int sex;
     private String description;
     private String email;
-    private Date add_time;
+    private Date addTime;
     private String status;
 
     public int getId() {
@@ -54,12 +54,12 @@ public class User {
         this.email = email;
     }
 
-    public Date getAdd_time() {
-        return add_time;
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setAdd_time(Date add_time) {
-        this.add_time = add_time;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
     public String getStatus() {
@@ -78,7 +78,7 @@ public class User {
                 ", sex=" + sex +
                 ", description='" + description + '\'' +
                 ", email='" + email + '\'' +
-                ", add_time=" + add_time +
+                ", addTime=" + addTime +
                 ", status='" + status + '\'' +
                 '}';
     }
