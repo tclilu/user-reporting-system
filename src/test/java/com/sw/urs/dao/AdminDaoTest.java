@@ -51,6 +51,19 @@ public class AdminDaoTest {
     }
 
     /**
+     * 按id降序排列查询所有Admin DAO层接口测试
+     */
+    @Test
+    public void selectAdmins() {
+        try {
+            System.out.println(adminDao.selectAdmins());
+            logger.info("按id降序排列查询所有Admin DAO层接口正常");
+        } catch (Exception e) {
+            logger.error("按id降序排列查询所有Admin DAO层接口异常" + e.getMessage());
+        }
+    }
+
+    /**
      * 根据id查询管理人员信息DAO层接口测试
      */
     @Test
@@ -101,6 +114,19 @@ public class AdminDaoTest {
             logger.info("修改管理人员信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("修改管理人员信息DAO层接口异常" + e.getMessage());
+        }
+    }
+
+    /**
+     * 修改admin状态
+     */
+    @Test
+    public void updateStatus() {
+        try {
+            System.out.println(adminDao.updateStatus(1,1));
+            logger.info("修改admin状态DAO层接口正常");
+        } catch (Exception e) {
+            logger.error("修改admin状态DAO层接口异常" + e.getMessage());
         }
     }
 
