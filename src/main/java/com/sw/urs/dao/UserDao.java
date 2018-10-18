@@ -3,6 +3,8 @@ package com.sw.urs.dao;
 import com.sw.urs.model.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface UserDao {
     String TABLE_NAME = " user ";
@@ -16,6 +18,13 @@ public interface UserDao {
      */
     @Insert({"insert into ",TABLE_NAME,"(",INSERT_FIELDS,") values(#{username},#{sex},#{description},#{email},#{addTime},#{status})"})
     int addUser(User user);
+
+    /**
+     * 按id降序排列查询所有User
+     * @return
+     */
+    @Select({"select ",SELECT_FIELDS," from ",TABLE_NAME," order by id desc"})
+    List<User> selectUsers();
 
     /**
      * 根据id查询客户
