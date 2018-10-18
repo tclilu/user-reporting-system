@@ -3,6 +3,8 @@ package com.sw.urs.dao;
 import com.sw.urs.model.Admin;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface AdminDao {
     String TABLE_NAME = " admin ";
@@ -17,6 +19,13 @@ public interface AdminDao {
     @Insert({"insert into ",TABLE_NAME,"(",INSERT_FIELDS,
             ") values(#{adminName},#{password},#{salt},#{nickName},#{tel},#{avatar},#{addTime},#{rid},#{status})"})
     int addAdmin(Admin admin);
+
+    /**
+     * 按id降序排列查询所有Admin
+     * @return
+     */
+    @Select({"select ",SELECT_FIELDS," from ",TABLE_NAME," order by id desc"})
+    List<Admin> selectAdmins();
 
     /**
      * 根据id查询管理人员信息
@@ -41,6 +50,15 @@ public interface AdminDao {
     @Update({"update ",TABLE_NAME,
             " set admin_name=#{adminName},password=#{password},salt=#{salt},nick_name=#{nickName},tel=#{tel},avatar=#{avatar},rid=#{rid},status=#{status} where id=#{id}"})
     int updateAdmin(Admin admin);
+
+    /**
+     * 修改admin状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @Update({"update ",TABLE_NAME," set status=#{status} where id=#{id}"})
+    int updateStatus(@Param("id") int id,@Param("status") int status);
 
     /**
      * 根据id删除管理人员
