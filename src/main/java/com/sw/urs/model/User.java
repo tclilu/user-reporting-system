@@ -1,5 +1,7 @@
 package com.sw.urs.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
@@ -7,9 +9,11 @@ import java.util.Date;
  */
 public class User {
     private int id;
+    @NotBlank(message = "客户名不能为空")
     private String username;
     private int sex;
     private String description;
+    @Email
     private String email;
     private Date addTime;
     private String status;
