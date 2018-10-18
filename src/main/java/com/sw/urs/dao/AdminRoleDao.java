@@ -3,6 +3,8 @@ package com.sw.urs.dao;
 import com.sw.urs.model.AdminRole;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface AdminRoleDao {
     String TABLE_NAME = " admin_role ";
@@ -18,11 +20,18 @@ public interface AdminRoleDao {
     int addAdminRole(AdminRole adminRole);
 
     /**
+     * 按id降序排列查询所有AdminRole
+     * @return
+     */
+    @Select({"select ",SELECT_FIELDS," from ",TABLE_NAME," order by id desc"})
+    List<AdminRole> selectAdminRoles();
+
+    /**
      * 根据id查询角色信息
      * @param id
      * @return
      */
-    @Select({"select ",SELECT_FIELDS," from ", TABLE_NAME," where id=#{id}"})
+    @Select({"select ",SELECT_FIELDS," from ",TABLE_NAME," where id=#{id}"})
     AdminRole selectById(int id);
 
     /**
@@ -31,6 +40,15 @@ public interface AdminRoleDao {
      */
     @Update({"update ",TABLE_NAME," set role_name=#{roleName},status=#{status} where id=#{id}"})
     int updateAdminRole(AdminRole adminRole);
+
+    /**
+     * 修改admin_role状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @Update({"update ",TABLE_NAME," set status=#{status} where id=#{id}"})
+    int updateStatus(@Param("id") int id,@Param("status") int status);
 
     /**
      * 根据id删除角色
