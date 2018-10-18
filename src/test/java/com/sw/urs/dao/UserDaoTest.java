@@ -48,6 +48,19 @@ public class UserDaoTest {
     }
 
     /**
+     * 按id降序排列查询所有User DAO层接口测试
+     */
+    @Test
+    public void selectUsers() {
+        try {
+            System.out.println(userDao.selectUsers());
+            logger.info("按id降序排列查询所有User DAO层接口正常");
+        } catch (Exception e) {
+            logger.error("按id降序排列查询所有User接口异常" + e.getMessage());
+        }
+    }
+
+    /**
      * 根据id查询客户信息DAO层接口测试
      */
     @Test
