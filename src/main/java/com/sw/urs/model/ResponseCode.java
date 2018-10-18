@@ -7,6 +7,7 @@ public enum ResponseCode {
     ADMIN_EXIST_ERROR(10002,"用户名已存在"),
     PASSWORD_ERROR(10003,"密码错误"),
     FORBIDDEN(10004,"账号已被禁用"),
+    THIS_IS_ADMIN(10005,"不能对管理员进行操作"),
     PARAMS_ERROR(10101,"参数错误"),
     SQL_ERROR(10102,"数据库异常，请稍后重试~")
     ;

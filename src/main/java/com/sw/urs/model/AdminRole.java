@@ -1,10 +1,14 @@
 package com.sw.urs.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 /**
  * 系统角色类
  */
 public class AdminRole {
     private int id;
+    @Size(max = 10,message = "角色名长度只能在10以内，请检查输入")
     private String roleName;
     // 0正常，1禁用
     private int status;
