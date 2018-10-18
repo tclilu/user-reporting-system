@@ -1,5 +1,8 @@
 package com.sw.urs.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -7,7 +10,11 @@ import java.util.Date;
  */
 public class Admin {
     private int id;
+    @NotBlank(message = "登录用户名不能为空")
+    @Email(message = "邮箱格式不正确")
     private String adminName;
+    @NotBlank(message = "登录密码不能为空")
+    @Size(min = 6,max = 16,message = "密码长度在6~16之间")
     private String password;
     private String salt;
     private String nickName;
@@ -15,6 +22,7 @@ public class Admin {
     private String avatar;
     private Date addTime;
     // 所属角色
+    @NotBlank(message = "请分配一个角色")
     private int rid;
     // 0正常,1禁用
     private int status;
