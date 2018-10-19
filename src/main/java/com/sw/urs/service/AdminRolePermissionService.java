@@ -5,7 +5,7 @@ import com.sw.urs.model.AdminRolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashSet;
 
 @Service
 public class AdminRolePermissionService {
@@ -26,7 +26,7 @@ public class AdminRolePermissionService {
      * @param rid
      * @return
      */
-    public List<AdminRolePermission> selectByRid(int rid) {
+    public HashSet<String> selectByRid(int rid) {
         return adminRolePermissionDao.selectByRid(rid);
     }
 
