@@ -102,8 +102,8 @@ public class AdminService {
      * 退出登录，将对应ticket状态置为1
      * @param ticket
      */
-    public void logout(String ticket) {
-        loginTicketDao.updateStatus(ticket,1);
+    public int logout(String ticket) {
+        return loginTicketDao.updateStatus(ticket,1);
     }
 
     /**
@@ -151,15 +151,24 @@ public class AdminService {
      * @return
      */
     public int updateAdmin(Admin admin) {
+        // 生成随机盐值
+        admin.setSalt(UUID.randomUUID().toString().substring(0,5));
+        // 带盐加密
+        admin.setPassword(MD5Util.md5(admin.getPassword() + admin.getSalt()));
+        // 设置默认状态
+        admin.setStatus(0);
         return adminDao.updateAdmin(admin);
     }
 
     /**
-     * 禁用admin
+     * 禁用admin(但不能禁用管理员，只能禁用销售或其它)
      * @param id
      * @return
      */
     public int forbidAdmin(int id) {
+        if (selectAdminById(id).getRid() == 1) {
+            throw new MyResponseException(ResponseCode.THIS_IS_ADMIN);
+        }
         return adminDao.updateStatus(id,1);
     }
 
