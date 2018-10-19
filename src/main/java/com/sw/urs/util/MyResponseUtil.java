@@ -28,4 +28,13 @@ public class MyResponseUtil {
         response.setMsg(msg);
         return response;
     }
+
+    /**
+     * 请求异常
+     * @param data
+     * @return
+     */
+    public static MyResponse error(Object data) {
+        return new MyResponse<>(ResponseCode.NET_ERROR,data);
+    }
 }
