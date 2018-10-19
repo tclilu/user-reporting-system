@@ -11,7 +11,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
@@ -47,8 +47,8 @@ public class AdminRolePermissionDaoTest {
     @Test
     public void selectByRid() {
         try {
-            List<AdminRolePermission> adminRolePermissions = adminRolePermissionDao.selectByRid(1);
-            System.out.println(adminRolePermissions);
+            HashSet<String> adminPermissions = adminRolePermissionDao.selectByRid(1);
+            System.out.println(adminPermissions);
             logger.info("根据角色id查询该角色拥有的权限DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据角色id查询该角色拥有的权限DAO层接口异常" + e.getMessage());
