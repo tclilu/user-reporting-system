@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class UserService {
         // 过滤可能的HTML标签
         user.setUsername(HtmlUtils.htmlEscape(user.getUsername()));
         user.setDescription(HtmlUtils.htmlEscape(user.getDescription()));
+        // 设置添加时间
+        user.setAddTime(new Date());
         return userDao.addUser(user);
     }
 
