@@ -1,8 +1,10 @@
 package com.sw.urs.dao;
 
+import com.sw.urs.model.AdminPermission;
 import com.sw.urs.model.AdminRolePermission;
 import org.apache.ibatis.annotations.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Mapper
@@ -19,12 +21,12 @@ public interface AdminRolePermissionDao {
     int addAdminRolePermission(AdminRolePermission adminRolePermission);
 
     /**
-     * 根据角色id查询该角色拥有的权限
+     * 根据角色id查询该角色拥有的权限的路由地址集合
      * @param rid
      * @return
      */
-    @Select({"select ",FIELDS," from ",TABLE_NAME," where role_id=#{rid}"})
-    List<AdminRolePermission> selectByRid(int rid);
+    @Select({"select api_address from admin_permission,admin_role_permission where #{rid}=admin_role_permission.role_id and admin_permission.id=admin_role_permission.permission_id"})
+    HashSet<String> selectByRid(int rid);
 
     /**
      * 删除rid对应角色的对应权限
