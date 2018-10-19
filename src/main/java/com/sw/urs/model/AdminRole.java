@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
  */
 public class AdminRole {
     private int id;
-    @Size(max = 10,message = "角色名长度只能在10以内，请检查输入")
+    @Size(min = 1,max = 10,message = "角色名长度为1~10，请检查输入")
     private String roleName;
     // 0正常，1禁用
     private int status;

@@ -1,12 +1,18 @@
 package com.sw.urs.model;
 
+import com.sun.xml.internal.ws.api.model.MEP;
+
+import javax.validation.constraints.NotBlank;
+
 /**
  * 权限表
  */
 public class AdminPermission {
     private int id;
     private int parentId;
+    @NotBlank(message = "权限名不能为空")
     private String permissionName;
+    @NotBlank(message = "权限路由地址不能为空")
     private String apiAddress;
     private int isHidden;
     private int status;

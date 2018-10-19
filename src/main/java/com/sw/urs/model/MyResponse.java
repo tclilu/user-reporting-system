@@ -44,13 +44,4 @@ public class MyResponse<T> {
     public void setData(T data) {
         this.data = data;
     }
-
-    @Override
-    public String toString() {
-        return "MyResponse{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
-    }
 }
