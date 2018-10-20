@@ -1,10 +1,14 @@
 package com.sw.urs.interceptor;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sw.urs.dao.AdminDao;
 import com.sw.urs.dao.LoginTicketDao;
 import com.sw.urs.model.Admin;
 import com.sw.urs.model.HostHolder;
 import com.sw.urs.model.LoginTicket;
+import com.sw.urs.model.ResponseCode;
+import com.sw.urs.util.MyResponseUtil;
+import com.sw.urs.util.ReturnJsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -42,7 +46,8 @@ public class PassportInterceptor implements HandlerInterceptor {
             LoginTicket loginTicket = loginTicketDao.selectByTicket(ticket);
             // 无ticket、ticket过期、ticket无效
             if (loginTicket == null || loginTicket.getExpired().before(new Date()) || loginTicket.getStatus() != 0) {
-                return true;
+                ReturnJsonUtil.returnJson(response, JSONObject.toJSONString(MyResponseUtil.info(ResponseCode.NO_LOGIN,"身份已过期，请重新登录~")));
+                return false;
             }
             Admin admin = adminDao.selectById(loginTicket.getAdminId());
             hostHolder.setAdmin(admin);
