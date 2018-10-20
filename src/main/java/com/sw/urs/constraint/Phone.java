@@ -10,7 +10,7 @@ import java.lang.annotation.*;
  * 自定义手机号校验注解
  */
 @Constraint(validatedBy = PhoneValidator.class)
-@Target({ElementType.METHOD,ElementType.FIELD})
+@Target({ElementType.METHOD,ElementType.FIELD,ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Phone {
