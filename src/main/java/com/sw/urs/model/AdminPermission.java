@@ -12,7 +12,6 @@ public class AdminPermission {
     private int parentId;
     @NotBlank(message = "权限名不能为空")
     private String permissionName;
-    @NotBlank(message = "权限路由地址不能为空")
     private String apiAddress;
     private int isHidden;
     private int status;
