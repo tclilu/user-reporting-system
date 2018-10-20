@@ -11,6 +11,7 @@ public enum ResponseCode {
     PASSWORD_ERROR(10003,"密码错误"),
     FORBIDDEN(10004,"账号已被禁用"),
     THIS_IS_ADMIN(10005,"不能对管理员进行操作"),
+    NOT_EMAIL(10006,"邮箱格式不正确"),
     PARAMS_ERROR(10101,"参数错误"),
     SYS_ERROR(10102,"系统错误~")
     ;
