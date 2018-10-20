@@ -28,7 +28,10 @@ public class AdminService {
      * @param rid 所属角色id
      * @return 数据库表影响的行数
      */
-    public int addAdmin(String adminName,String password,int rid) {
+    public int addAdmin(String adminName, String password, int rid) {
+        if (!adminName.matches("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\\.[a-zA-Z0-9_-]{2,3}){1,2})$")) {
+            throw new MyResponseException(ResponseCode.NOT_EMAIL);
+        }
         Admin admin = adminDao.selectByAdminName(adminName);
         if (admin != null) {
             throw new MyResponseException(ResponseCode.ADMIN_EXIST_ERROR);
@@ -61,6 +64,9 @@ public class AdminService {
      * @return
      */
     public Map<String,Object> login(String adminName,String password) {
+        if (adminName.isEmpty() || password.isEmpty()) {
+            throw new MyResponseException(ResponseCode.PARAMS_ERROR);
+        }
         Admin admin = adminDao.selectByAdminName(adminName);
         // 登录名不存在
         if (admin == null) {
@@ -178,6 +184,9 @@ public class AdminService {
      * @return
      */
     public int unForbiddenAdmin(int id) {
+        if (selectAdminById(id).getRid() == 1) {
+            throw new MyResponseException(ResponseCode.THIS_IS_ADMIN);
+        }
         return adminDao.updateStatus(id,0);
     }
 
@@ -187,6 +196,9 @@ public class AdminService {
      * @return
      */
     public int deleteAdminById(int id) {
+        if (selectAdminById(id).getRid() == 1) {
+            throw new MyResponseException(ResponseCode.THIS_IS_ADMIN);
+        }
         return adminDao.deleteById(id);
     }
 }
