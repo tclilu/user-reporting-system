@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/v1",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/",produces = "application/json;charset=UTF-8")
 public class BaseController {
 
     /**
@@ -18,7 +18,7 @@ public class BaseController {
     @RequestMapping(method = RequestMethod.GET)
     public Map<String,String> index() {
         Map<String,String> map = new HashMap<>();
-        map.put("version","1.0.1");
+        map.put("version","1.0.0");
         return map;
     }
 }

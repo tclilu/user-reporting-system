@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/v1/admin",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/admin",produces = "application/json;charset=UTF-8")
 public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -35,10 +35,13 @@ public class LoginController {
         try {
             Map<String,Object> map = adminService.login(adminName,password);
             if (map.containsKey("ticket")) {
+                // 下发登录ticket的cookie
                 Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
                 cookie.setPath("/");
                 response.addCookie(cookie);
-                return MyResponseUtil.success(adminService.selectAdminById(Integer.parseInt(map.get("adminId").toString())).toString());
+                // 设置系统API版本信息
+                response.addHeader("Accept","Version = 1.0.0");
+                return MyResponseUtil.info(ResponseCode.LOGIN_SUCCESS,adminService.selectAdminById(Integer.parseInt(map.get("adminId").toString())));
             } else {
                 return MyResponseUtil.error("error");
             }

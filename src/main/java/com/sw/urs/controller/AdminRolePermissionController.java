@@ -8,16 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
 
 @RestController
-@RequestMapping(value = "/api/v1/adminRolePermission",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/admin/adminRolePermission",produces = "application/json;charset=UTF-8")
 public class AdminRolePermissionController {
     private static final Logger logger = LoggerFactory.getLogger(AdminRolePermissionController.class);
 
@@ -25,7 +22,7 @@ public class AdminRolePermissionController {
     AdminRolePermissionService adminRolePermissionService;
 
     /**
-     * 添加adminRolePermission 角色拥有的权限
+     * 给角色分配权限
      * @param adminRolePermission
      * @param bindingResult
      * @return
@@ -48,8 +45,8 @@ public class AdminRolePermissionController {
      * @param rid
      * @return
      */
-    @RequestMapping(value = "/detail",method = RequestMethod.GET)
-    public MyResponse selectByRid(int rid) {
+    @RequestMapping(value = "/rid",method = RequestMethod.GET)
+    public MyResponse selectByRid(@RequestParam("rid") int rid) {
         try {
             HashSet<String> permissions = adminRolePermissionService.selectByRid(rid);
             return permissions.isEmpty() ? MyResponseUtil.error("该角色无任何权限") : MyResponseUtil.success(permissions);

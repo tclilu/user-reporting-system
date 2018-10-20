@@ -2,7 +2,6 @@ package com.sw.urs.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.sw.urs.model.MyResponse;
-import com.sw.urs.model.ResponseCode;
 import com.sw.urs.model.User;
 import com.sw.urs.service.UserService;
 import com.sw.urs.util.MyResponseUtil;
@@ -10,16 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/user",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/admin/user",produces = "application/json;charset=UTF-8")
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -79,13 +75,13 @@ public class UserController {
 
     /**
      * 根据id查询user信息
-     * @param id
+     * @param userId
      * @return
      */
-    @RequestMapping(value = "/detail",method = RequestMethod.GET)
-    public MyResponse selectUserById(int id) {
+    @RequestMapping(value = "/id",method = RequestMethod.GET)
+    public MyResponse selectUserById(@RequestParam("userId") int userId) {
         try {
-            User user = userService.selectUserById(id);
+            User user = userService.selectUserById(userId);
             return user == null ? MyResponseUtil.error("该user不存在") : MyResponseUtil.success(user);
         } catch (Exception e) {
             logger.error("根据id查询user异常" + e.getMessage());

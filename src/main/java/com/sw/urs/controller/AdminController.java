@@ -5,21 +5,17 @@ import com.sw.urs.model.Admin;
 import com.sw.urs.model.MyResponse;
 import com.sw.urs.service.AdminService;
 import com.sw.urs.util.MyResponseUtil;
-import javafx.scene.chart.ValueAxis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/admin",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/admin",produces = "application/json;charset=UTF-8")
 public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -50,7 +46,7 @@ public class AdminController {
      * @param adminName
      * @return
      */
-    @RequestMapping(value = "/byName",method = RequestMethod.GET)
+    @RequestMapping(value = "/adminName",method = RequestMethod.GET)
     public MyResponse selectByAdminName(String adminName) {
         try {
             Admin admin = adminService.selectByAdminName(adminName);
@@ -67,6 +63,7 @@ public class AdminController {
      * @param pageSize 每页数量
      * @return
      */
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
     public MyResponse selectPageAdmin(@RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
         try {
             PageInfo<Admin> adminPageInfo = adminService.selectPageAdmin(currentPage,pageSize);
@@ -94,13 +91,13 @@ public class AdminController {
 
     /**
      * 根据id查询admin信息
-     * @param id
+     * @param adminId
      * @return
      */
-    @RequestMapping(value = "/detail",method = RequestMethod.GET)
-    public MyResponse selectAdminById(int id) {
+    @RequestMapping(value = "/id",method = RequestMethod.GET)
+    public MyResponse selectAdminById(@RequestParam("adminId") int adminId) {
         try {
-            Admin admin = adminService.selectAdminById(id);
+            Admin admin = adminService.selectAdminById(adminId);
             return admin == null ? MyResponseUtil.error("该admin不存在") : MyResponseUtil.success(admin);
         } catch (Exception e) {
             logger.error("根据id查询admin异常" + e.getMessage());

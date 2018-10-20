@@ -9,16 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/admin",produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/admin/adminRole",produces = "application/json;charset=UTF-8")
 public class AdminRoleController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -50,6 +47,7 @@ public class AdminRoleController {
      * @param pageSize 每页数量
      * @return
      */
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
     public MyResponse selectPageAdminRole(@RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
         try {
             PageInfo<AdminRole> adminRolePageInfo = adminRoleService.selectPageAdminRole(currentPage,pageSize);
@@ -77,13 +75,13 @@ public class AdminRoleController {
 
     /**
      * 根据id查询adminRole信息
-     * @param id
+     * @param adminRoleId
      * @return
      */
-    @RequestMapping(value = "/detail",method = RequestMethod.GET)
-    public MyResponse selectAdminRoleById(int id) {
+    @RequestMapping(value = "/id",method = RequestMethod.GET)
+    public MyResponse selectAdminRoleById(@RequestParam("adminRoleId") int adminRoleId) {
         try {
-            AdminRole adminRole = adminRoleService.selectAdminRoleById(id);
+            AdminRole adminRole = adminRoleService.selectAdminRoleById(adminRoleId);
             return adminRole == null ? MyResponseUtil.error("该角色不存在") : MyResponseUtil.success(adminRole);
         } catch (Exception e) {
             logger.error("根据id查询adminRole异常" + e.getMessage());
