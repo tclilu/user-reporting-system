@@ -20,12 +20,12 @@ public class MyResponseUtil {
     /**
      * 自定义响应信息
      * @param responseCode
-     * @param msg
+     * @param data
      * @return
      */
-    public static MyResponse info(ResponseCode responseCode,String msg) {
+    public static MyResponse info(ResponseCode responseCode,Object data) {
         MyResponse<Object> response = new MyResponse<>(responseCode);
-        response.setMsg(msg);
+        response.setData(data);
         return response;
     }
 
