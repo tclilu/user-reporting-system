@@ -48,7 +48,7 @@ public interface AdminDao {
      * @param admin
      */
     @Update({"update ",TABLE_NAME,
-            " set admin_name=#{adminName},password=#{password},salt=#{salt},nick_name=#{nickName},tel=#{tel},avatar=#{avatar},rid=#{rid},status=#{status} where id=#{id}"})
+            " set password=#{password},salt=#{salt},nick_name=#{nickName},tel=#{tel},avatar=#{avatar},rid=#{rid},status=#{status} where id=#{id}"})
     int updateAdmin(Admin admin);
 
     /**
