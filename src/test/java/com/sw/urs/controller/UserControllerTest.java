@@ -130,4 +130,18 @@ public class UserControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8)
         ).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
+
+    /**
+     * 模糊查询
+     * @throws Exception
+     */
+    @Test
+    public void selectUserLikeUsername() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/user/usernameKeyword")
+                .cookie(cookie)
+                .param("usernameKeyword","4")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+        ).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+    }
 }

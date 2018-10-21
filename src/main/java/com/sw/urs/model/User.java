@@ -19,6 +19,9 @@ public class User {
     private String email;
     private Date addTime;
     private String status;
+    private int adminId;
+    private int payMoney;
+    private String nickName;
 
     public int getId() {
         return id;
@@ -76,6 +79,30 @@ public class User {
         this.status = status;
     }
 
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
+    public int getPayMoney() {
+        return payMoney;
+    }
+
+    public void setPayMoney(int payMoney) {
+        this.payMoney = payMoney;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -86,6 +113,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", addTime=" + addTime +
                 ", status='" + status + '\'' +
+                ", adminId=" + adminId +
+                ", payMoney=" + payMoney +
                 '}';
     }
 }

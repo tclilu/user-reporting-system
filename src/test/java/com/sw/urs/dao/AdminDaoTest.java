@@ -1,6 +1,7 @@
 package com.sw.urs.dao;
 
 import com.sw.urs.model.Admin;
+import com.sw.urs.util.MD5Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -27,20 +28,17 @@ public class AdminDaoTest {
      * 添加管理员人员DAO层接口测试
      */
     @Test
-    @Transactional
     public void addAdmin() {
         try {
             Admin admin = new Admin();
-            admin.setAdminName("admintest");
-            admin.setPassword("123456");
+            admin.setAdminName("77777777@qq.com");
             admin.setSalt("abcdef");
-            admin.setNickName("系统管理员");
+            admin.setPassword(MD5Util.md5("123456abcdef"));
+            admin.setNickName("销售5");
             admin.setTel("12345678");
             admin.setAvatar("http://images.nowcoder.com/head/535t.png");
-            Date date = new Date();
-            date.setTime(date.getTime());
-            admin.setAddTime(date);
-            admin.setRid(1);
+            admin.setAddTime(new Date());
+            admin.setRid(2);
             admin.setStatus(0);
             int result = adminDao.addAdmin(admin);
             System.out.println(result);
@@ -100,7 +98,7 @@ public class AdminDaoTest {
     public void updateAdmin() {
         try {
             Admin admin = new Admin();
-            admin.setId(1);
+            admin.setId(2);
             admin.setAdminName("修改测试");
             admin.setPassword("1212121");
             admin.setSalt("asdfgh");

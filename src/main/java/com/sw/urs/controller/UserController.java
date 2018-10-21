@@ -90,6 +90,22 @@ public class UserController {
     }
 
     /**
+     * 根据客户username模糊查询
+     * @param usernameKeyword
+     * @return
+     */
+    @RequestMapping(value = "/usernameKeyword",method = RequestMethod.GET)
+    public MyResponse selectUserLikeUsername(@RequestParam("usernameKeyword") String usernameKeyword) {
+        try {
+            List<User> users = userService.selectUserLikeUsername(usernameKeyword);
+            return users == null ? MyResponseUtil.error("无匹配结果") : MyResponseUtil.success(users);
+        } catch (Exception e) {
+            logger.error("根据客户username模糊查询user异常" + e.getMessage());
+            return MyResponseUtil.error(e.getMessage());
+        }
+    }
+
+    /**
      * 修改user信息
      * @param user
      * @return
