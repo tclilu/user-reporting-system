@@ -6,6 +6,7 @@ public enum ResponseCode {
     NET_ERROR(-1,"请求异常，请稍后重试~"),
     NO_LOGIN(-2,"未登录~"),
     NO_PERMISSION(-3,"您没有该权限"),
+    PERMISSION_FORBIDDEN(-4,"该权限已被禁用"),
     ADMIN_NAME_ERROR(10001,"用户名不存在"),
     ADMIN_EXIST_ERROR(10002,"用户名已存在"),
     PASSWORD_ERROR(10003,"密码错误"),

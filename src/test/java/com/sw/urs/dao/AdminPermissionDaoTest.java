@@ -92,4 +92,13 @@ public class AdminPermissionDaoTest {
             logger.error("根据id删除权限DAO层接口异常" + e.getMessage());
         }
     }
+
+    /**
+     * 查询权限的状态
+     * @throws Exception
+     */
+    @Test
+    public void selectStatusByApiAddress() throws Exception {
+        System.out.println(adminPermissionDao.selectStatusByApiAddress("/admin/adminPermission/page"));
+    }
 }

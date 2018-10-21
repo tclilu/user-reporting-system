@@ -139,4 +139,13 @@ public class AdminPermissionServiceTest {
             logger.error("根据权限id删除权限 Service异常" + e.getMessage());
         }
     }
+
+    /**
+     * 根据URI地址查询权限状态 测试
+     * @throws Exception
+     */
+    @Test
+    public void selectStatusByApiAddress() throws Exception {
+        System.out.println(adminPermissionService.selectStatusByApiAddress("/admin/adminPermission/page"));
+    }
 }

@@ -35,6 +35,14 @@ public interface AdminPermissionDao {
     AdminPermission selectById(int id);
 
     /**
+     * 根据URI地址查询权限状态
+     * @param apiAddress
+     * @return
+     */
+    @Select({"select status from ",TABLE_NAME," where api_address=#{apiAddress}"})
+    int selectStatusByApiAddress(String apiAddress);
+
+    /**
      * 修改权限信息
      * @param adminPermission
      * @return

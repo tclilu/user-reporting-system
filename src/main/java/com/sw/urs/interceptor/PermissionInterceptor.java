@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sw.urs.model.Admin;
 import com.sw.urs.model.HostHolder;
 import com.sw.urs.model.ResponseCode;
+import com.sw.urs.service.AdminPermissionService;
 import com.sw.urs.service.AdminRolePermissionService;
 import com.sw.urs.util.MyResponseUtil;
 import com.sw.urs.util.ReturnJsonUtil;
@@ -28,12 +29,21 @@ public class PermissionInterceptor implements HandlerInterceptor {
     @Autowired
     AdminRolePermissionService adminRolePermissionService;
 
+    @Autowired
+    AdminPermissionService adminPermissionService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Admin admin = hostHolder.getAdmin();
         // 非法越过LoginRequiredInterceptor拦截器
         if (admin == null) {
             ReturnJsonUtil.returnJson(response,JSONObject.toJSONString("非法入侵"));
+            return false;
+        }
+        // 判断权限的状态（0：正常；1：禁用）
+        if (adminPermissionService.selectStatusByApiAddress(request.getRequestURI()) == 1) {
+            // 该权限已被禁用
+            ReturnJsonUtil.returnJson(response,JSONObject.toJSONString(MyResponseUtil.info(ResponseCode.PERMISSION_FORBIDDEN,"该功能被禁用，请联系管理人员或开发人员")));
             return false;
         }
         // 查询角色拥有的权限

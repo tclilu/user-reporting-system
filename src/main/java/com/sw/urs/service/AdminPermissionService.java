@@ -58,6 +58,15 @@ public class AdminPermissionService {
     }
 
     /**
+     * 根据URI地址查询权限状态
+     * @param apiAddress
+     * @return
+     */
+    public int selectStatusByApiAddress(String apiAddress) {
+        return adminPermissionDao.selectStatusByApiAddress(apiAddress);
+    }
+
+    /**
      * 修改权限信息
      * @param adminPermission
      * @return
