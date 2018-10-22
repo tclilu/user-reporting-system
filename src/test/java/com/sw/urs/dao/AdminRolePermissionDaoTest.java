@@ -34,8 +34,10 @@ public class AdminRolePermissionDaoTest {
             AdminRolePermission adminRolePermission = new AdminRolePermission();
             adminRolePermission.setRoleId(2);
             adminRolePermission.setPermissionId(1);
-            adminRolePermissionDao.addAdminRolePermission(adminRolePermission);
-            logger.info("添加角色权限DAO层接口正常");
+            int result = adminRolePermissionDao.addAdminRolePermission(adminRolePermission);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("添加角色权限DAO层接口异常" + e.getMessage());
         }
@@ -48,8 +50,8 @@ public class AdminRolePermissionDaoTest {
     public void selectByRid() {
         try {
             HashSet<String> adminPermissions = adminRolePermissionDao.selectByRid(1);
+            assertNotNull(adminPermissions);
             System.out.println(adminPermissions);
-            logger.info("根据角色id查询该角色拥有的权限DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据角色id查询该角色拥有的权限DAO层接口异常" + e.getMessage());
         }
@@ -64,8 +66,9 @@ public class AdminRolePermissionDaoTest {
     public void deleteAdminRolePermission() {
         try {
             int result = adminRolePermissionDao.deleteAdminRolePermission(1,2);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("删除rid对应角色的对应权限DAO层接口正常");
         } catch (Exception e) {
             logger.error("删除rid对应角色的对应权限DAO层接口异常" + e.getMessage());
         }

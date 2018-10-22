@@ -11,6 +11,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -30,8 +32,10 @@ public class AdminRolePermissionServiceTest {
             AdminRolePermission adminRolePermission = new AdminRolePermission();
             adminRolePermission.setRoleId(2);
             adminRolePermission.setPermissionId(2);
-            System.out.println(adminRolePermissionService.addAdminRolePermission(adminRolePermission));
-            logger.info("添加角色的权限 Service正常");
+            int result = adminRolePermissionService.addAdminRolePermission(adminRolePermission);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("添加角色的权限 Service异常" + e.getMessage());
         }
@@ -43,8 +47,9 @@ public class AdminRolePermissionServiceTest {
     @Test
     public void selectByRid() {
         try {
-            System.out.println(adminRolePermissionService.selectByRid(2));
-            logger.info("查询rid对应角色拥有的权限 Service正常");
+            HashSet<String> hashSet = adminRolePermissionService.selectByRid(2);
+            assertNotNull(hashSet);
+            System.out.println(hashSet);
         } catch (Exception e) {
             logger.error("查询rid对应角色拥有的权限 Service异常" + e.getMessage());
         }
@@ -58,8 +63,10 @@ public class AdminRolePermissionServiceTest {
     @Rollback
     public void deleteAdminRolePermission() {
         try {
-            System.out.println(adminRolePermissionService.deleteAdminRolePermission(2,2));
-            logger.info("删除对应角色的权限 Service正常");
+            int result = adminRolePermissionService.deleteAdminRolePermission(2,2);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("删除对应角色的权限 Service异常" + e.getMessage());
         }

@@ -16,6 +16,6 @@ public class MD5UtilTest {
      */
     @Test
     public void md5() {
-        System.out.println(MD5Util.md5("123456"));
+        assertEquals("e10adc3949ba59abbe56e057f20f883e",MD5Util.md5("123456"));
     }
 }

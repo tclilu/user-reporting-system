@@ -33,8 +33,9 @@ public class AdminRoleDaoTest {
             adminRole.setRoleName("管理人员");
             adminRole.setStatus(0);
             int result = adminRoleDao.addAdminRole(adminRole);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("添加系统角色DAO层接口正常");
         } catch (Exception e) {
             logger.error("添加系统角色DAO层接口异常" + e.getMessage());
         }
@@ -47,8 +48,8 @@ public class AdminRoleDaoTest {
     public void selectById() {
         try {
             AdminRole adminRole = adminRoleDao.selectById(1);
+            assertNotNull(adminRole);
             System.out.println(adminRole);
-            logger.info("查询系统角色信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("查询系统角色信息DAO层接口异常" + e.getMessage());
         }
@@ -65,8 +66,9 @@ public class AdminRoleDaoTest {
             adminRole.setRoleName("修改测试");
             adminRole.setStatus(0);
             int result = adminRoleDao.updateAdminRole(adminRole);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("修改角色信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("修改角色信息DAO层接口异常" + e.getMessage());
         }
@@ -81,8 +83,9 @@ public class AdminRoleDaoTest {
     public void deleteById() {
         try {
             int result = adminRoleDao.deleteById(1);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("删除角色DAO层接口正常");
         } catch (Exception e) {
             logger.error("删除角色DAO层接口异常" + e.getMessage());
         }

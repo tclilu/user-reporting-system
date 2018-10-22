@@ -1,5 +1,6 @@
 package com.sw.urs.service;
 
+import com.github.pagehelper.PageInfo;
 import com.sw.urs.model.AdminPermission;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -33,8 +36,9 @@ public class AdminPermissionServiceTest {
             adminPermission.setApiAddress("/test/add");
             adminPermission.setIsHidden(0);
             adminPermission.setStatus(0);
-            System.out.println(adminPermissionService.addAdminPermission(adminPermission));
-            logger.info("添加权限 Service正常");
+            int result = adminPermissionService.addAdminPermission(adminPermission);
+            assertNotNull(result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("添加权限 Service异常" + e.getMessage());
         }
@@ -46,8 +50,9 @@ public class AdminPermissionServiceTest {
     @Test
     public void selectPageAdminPermission() {
         try {
-            System.out.println(adminPermissionService.selectPageAdminPermission(1,2));
-            logger.info("查询分页权限 Service正常");
+            PageInfo<AdminPermission> pageInfo = adminPermissionService.selectPageAdminPermission(1,2);
+            assertNotNull(pageInfo);
+            System.out.println(pageInfo);
         } catch (Exception e) {
             logger.error("查询分页权限 Service异常" + e.getMessage());
         }
@@ -59,8 +64,9 @@ public class AdminPermissionServiceTest {
     @Test
     public void selectAllAdminPermission() {
         try {
-            System.out.println(adminPermissionService.selectAllAdminPermission());
-            logger.info("查询所有权限 Service正常");
+            List<AdminPermission> adminPermissions = adminPermissionService.selectAllAdminPermission();
+            assertNotNull(adminPermissions);
+            System.out.println(adminPermissions);
         } catch (Exception e) {
             logger.error("查询所有权限 Service异常" + e.getMessage());
         }
@@ -72,8 +78,9 @@ public class AdminPermissionServiceTest {
     @Test
     public void selectAdminPermissionById() {
         try {
-            System.out.println(adminPermissionService.selectAdminPermissionById(1));
-            logger.info("根据权限id查询权限 Service正常");
+            AdminPermission adminPermission = adminPermissionService.selectAdminPermissionById(1);
+            assertNotNull(adminPermission);
+            System.out.println(adminPermission);
         } catch (Exception e) {
             logger.error("根据权限id查询权限 Service异常" + e.getMessage());
         }
@@ -92,8 +99,10 @@ public class AdminPermissionServiceTest {
             adminPermission.setApiAddress("/test/update");
             adminPermission.setIsHidden(1);
             adminPermission.setStatus(0);
-            System.out.println(adminPermissionService.updateAdminPermission(adminPermission));
-            logger.info("修改权限信息 Service正常");
+            int result = adminPermissionService.updateAdminPermission(adminPermission);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("修改权限信息 Service异常" + e.getMessage());
         }
@@ -105,8 +114,10 @@ public class AdminPermissionServiceTest {
     @Test
     public void forbidAdminPermission() {
         try {
-            System.out.println(adminPermissionService.forbidAdminPermission(2));
-            logger.info("禁用权限 Service正常");
+            int result = adminPermissionService.forbidAdminPermission(2);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("禁用权限 Service异常" + e.getMessage());
         }
@@ -118,8 +129,10 @@ public class AdminPermissionServiceTest {
     @Test
     public void unForbiddenAdminPermission() {
         try {
-            System.out.println(adminPermissionService.unForbiddenAdminPermission(2));
-            logger.info("解除权限禁用 Service正常");
+            int result = adminPermissionService.unForbiddenAdminPermission(2);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("解除权限禁用 Service异常" + e.getMessage());
         }
@@ -133,8 +146,10 @@ public class AdminPermissionServiceTest {
     @Rollback
     public void deleteAdminPermissionById() {
         try {
-            System.out.println(adminPermissionService.deleteAdminPermissionById(2));
-            logger.info("根据权限id删除权限 Service正常");
+            int result = adminPermissionService.deleteAdminPermissionById(2);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("根据权限id删除权限 Service异常" + e.getMessage());
         }
@@ -146,6 +161,6 @@ public class AdminPermissionServiceTest {
      */
     @Test
     public void selectStatusByApiAddress() throws Exception {
-        System.out.println(adminPermissionService.selectStatusByApiAddress("/admin/adminPermission/page"));
+        assertNotNull(adminPermissionService.selectStatusByApiAddress("/admin/adminPermission/page"));
     }
 }

@@ -1,10 +1,14 @@
 package com.sw.urs.dao;
 
+import com.sw.urs.model.Ranking;
+import com.sw.urs.util.ValidDateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +24,9 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserCountByThisWeek() throws Exception {
-        System.out.println(rankingDao.rankUserCountByThisWeek());
+        List<Ranking> rankings = rankingDao.rankUserCountByThisWeek();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -29,7 +35,9 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserCountByThisMonth() throws Exception {
-        System.out.println(rankingDao.rankUserCountByThisMonth());
+        List<Ranking> rankings = rankingDao.rankUserCountByThisMonth();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -38,7 +46,9 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserCountByThisYear() throws Exception {
-        System.out.println(rankingDao.rankUserCountByThisYear());
+        List<Ranking> rankings = rankingDao.rankUserCountByThisYear();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -47,7 +57,9 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserPayByThisWeek() throws Exception {
-        System.out.println(rankingDao.rankUserPayByThisWeek());
+        List<Ranking> rankings = rankingDao.rankUserPayByThisWeek();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -56,7 +68,9 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserPayByThisMonth() throws Exception {
-        System.out.println(rankingDao.rankUserPayByThisMonth());
+        List<Ranking> rankings = rankingDao.rankUserPayByThisMonth();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -65,7 +79,9 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserPayByThisYear() throws Exception {
-        System.out.println(rankingDao.rankUserPayByThisYear());
+        List<Ranking> rankings = rankingDao.rankUserPayByThisYear();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -74,7 +90,9 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserCountByDateRange() throws Exception {
-        System.out.println(rankingDao.rankUserCountByDateRange("2018-10-18","2018-10-21"));
+        List<Ranking> rankings = rankingDao.rankUserCountByDateRange("2018-10-18","2018-10-21");
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -83,6 +101,8 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserPayByDateRange() throws Exception {
-        System.out.println(rankingDao.rankUserPayByDateRange("2018-10-18","2018-10-21"));
+        List<Ranking> rankings = rankingDao.rankUserPayByDateRange("2018-10-18","2018-10-21");
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 }

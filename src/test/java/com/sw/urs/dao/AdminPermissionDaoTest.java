@@ -35,8 +35,10 @@ public class AdminPermissionDaoTest {
             adminPermission.setApiAddress("/sale/add");
             adminPermission.setIsHidden(0);
             adminPermission.setStatus(0);
-            adminPermissionDao.addAdminPermission(adminPermission);
-            logger.info("添加权限DAO层接口正常");
+            int result = adminPermissionDao.addAdminPermission(adminPermission);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("添加权限DAO层接口异常" + e.getMessage());
         }
@@ -49,8 +51,8 @@ public class AdminPermissionDaoTest {
     public void selectById() {
         try {
             AdminPermission adminPermission = adminPermissionDao.selectById(1);
+            assertNotNull(adminPermission);
             System.out.println(adminPermission);
-            logger.info("根据id查询权限DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据id查询权限DAO层接口异常" + e.getMessage());
         }
@@ -70,8 +72,9 @@ public class AdminPermissionDaoTest {
             adminPermission.setIsHidden(1);
             adminPermission.setStatus(0);
             int result = adminPermissionDao.updateAdminPermission(adminPermission);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("修改权限信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("修改权限信息DAO层接口异常" + e.getMessage());
         }
@@ -86,8 +89,9 @@ public class AdminPermissionDaoTest {
     public void deleteById() {
         try {
             int result = adminPermissionDao.deleteById(1);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("根据id删除权限DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据id删除权限DAO层接口异常" + e.getMessage());
         }
@@ -99,6 +103,9 @@ public class AdminPermissionDaoTest {
      */
     @Test
     public void selectStatusByApiAddress() throws Exception {
-        System.out.println(adminPermissionDao.selectStatusByApiAddress("/admin/adminPermission/page"));
+        int result = adminPermissionDao.selectStatusByApiAddress("/admin/adminPermission/page");
+        assertNotNull(result);
+        assertEquals(1,result);
+        System.out.println(result);
     }
 }

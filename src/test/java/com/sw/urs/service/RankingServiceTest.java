@@ -1,10 +1,14 @@
 package com.sw.urs.service;
 
+import com.sw.urs.model.Ranking;
+import com.sw.urs.util.ValidDateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +24,9 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserCountByThisWeek() throws Exception {
-        System.out.println(rankingService.rankUserCountByThisWeek());
+        List<Ranking> rankings = rankingService.rankUserCountByThisWeek();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -29,7 +35,9 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserCountByThisMonth() throws Exception {
-        System.out.println(rankingService.rankUserCountByThisMonth());
+        List<Ranking> rankings = rankingService.rankUserCountByThisMonth();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -38,7 +46,9 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserCountByThisYear() throws Exception {
-        System.out.println(rankingService.rankUserCountByThisYear());
+        List<Ranking> rankings = rankingService.rankUserCountByThisYear();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -47,7 +57,17 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserCountByDateRange() throws Exception {
-        System.out.println(rankingService.rankUserCountByDateRange("2018-10-18","2018-10-21"));
+        String smallDate1 = "2018-10-18";
+        String bigDate1 = "2018-10-21";
+        boolean flag1 = ValidDateUtil.isValidDate(smallDate1,bigDate1);
+        assertTrue(flag1);
+        String smallDate2 = "2018-10-81";
+        String bigDate2 = "avsdsdsd";
+        boolean flag2 = ValidDateUtil.isValidDate(smallDate2,bigDate2);
+        assertFalse(flag2);
+        List<Ranking> rankings = rankingService.rankUserCountByDateRange(smallDate1,bigDate1);
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -56,7 +76,9 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserPayByThisWeek() throws Exception {
-        System.out.println(rankingService.rankUserPayByThisWeek());
+        List<Ranking> rankings = rankingService.rankUserPayByThisWeek();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -65,7 +87,9 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserPayByThisMonth() throws Exception {
-        System.out.println(rankingService.rankUserPayByThisMonth());
+        List<Ranking> rankings = rankingService.rankUserPayByThisMonth();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -74,7 +98,9 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserPayByThisYear() throws Exception {
-        System.out.println(rankingService.rankUserPayByThisYear());
+        List<Ranking> rankings = rankingService.rankUserPayByThisYear();
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 
     /**
@@ -83,6 +109,16 @@ public class RankingServiceTest {
      */
     @Test
     public void rankUserPayByDateRange() throws Exception {
-        System.out.println(rankingService.rankUserPayByDateRange("2018-10-18","2018-10-21"));
+        String smallDate1 = "2018-10-18";
+        String bigDate1 = "2018-10-21";
+        boolean flag1 = ValidDateUtil.isValidDate(smallDate1,bigDate1);
+        assertTrue(flag1);
+        String smallDate2 = "2018-10-81";
+        String bigDate2 = "avsdsdsd";
+        boolean flag2 = ValidDateUtil.isValidDate(smallDate2,bigDate2);
+        assertFalse(flag2);
+        List<Ranking> rankings = rankingService.rankUserPayByDateRange(smallDate1,bigDate1);
+        assertNotNull(rankings);
+        System.out.println(rankings);
     }
 }

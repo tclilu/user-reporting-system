@@ -1,6 +1,7 @@
 package com.sw.urs.util;
 
 import com.sw.urs.model.ResponseCode;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ public class MyResponseUtilTest {
      */
     @Test
     public void success() {
+        assertNotNull(MyResponseUtil.success("ok"));
         System.out.println(MyResponseUtil.success("ok"));
     }
 
@@ -28,6 +30,7 @@ public class MyResponseUtilTest {
      */
     @Test
     public void info() {
+        assertNotNull(MyResponseUtil.info(ResponseCode.SUCCESS,"ok"));
         System.out.println(MyResponseUtil.info(ResponseCode.SUCCESS,"ok"));
     }
 }

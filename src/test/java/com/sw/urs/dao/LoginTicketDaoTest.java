@@ -36,8 +36,9 @@ public class LoginTicketDaoTest {
             loginTicket.setExpired(date);
             loginTicket.setStatus(0);
             int result = loginTicketDao.addTicket(loginTicket);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("添加ticket接口正常");
         } catch (Exception e) {
             logger.error("添加ticket接口异常" + e.getMessage());
         }
@@ -50,8 +51,8 @@ public class LoginTicketDaoTest {
     public void selectByTicket() {
         try {
             LoginTicket loginTicket = loginTicketDao.selectByTicket("3bdf98666b984cb2941d84d21c1a712d");
+            assertNotNull(loginTicket);
             System.out.println(loginTicket);
-            logger.info("根据ticket查询ticket接口正常");
         } catch (Exception e) {
             logger.error("根据ticket查询ticket接口异常" + e.getMessage());
         }
@@ -64,8 +65,9 @@ public class LoginTicketDaoTest {
     public void updateStatus() {
         try {
             int result = loginTicketDao.updateStatus("f03bd8e56cd4490a9af279590dd65b69",1);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("修改ticket接口正常");
         } catch (Exception e) {
             logger.error("修改ticket接口异常" + e.getMessage());
         }

@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -53,8 +54,9 @@ public class UserDaoTest {
             user.setAdminId(4);
             user.setPayMoney(6666);
             int result = userDao.addUser(user);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("添加客户DAO层接口正常");
         } catch (Exception e) {
             logger.error("添加客户DAO层接口异常" + e.getMessage());
         }
@@ -66,8 +68,9 @@ public class UserDaoTest {
     @Test
     public void adminSelectUsers() {
         try {
-            System.out.println(userDao.adminSelectUsers());
-            logger.info("接口正常");
+            List<User> users = userDao.adminSelectUsers();
+            assertNotNull(users);
+            System.out.println(users);
         } catch (Exception e) {
             logger.error("接口异常" + e.getMessage());
         }
@@ -79,8 +82,9 @@ public class UserDaoTest {
     @Test
     public void saleSelectUsers() {
         try {
-            System.out.println(userDao.saleSelectUsers(2));
-            logger.info("接口正常");
+            List<User> users = userDao.saleSelectUsers(2);
+            assertNotNull(users);
+            System.out.println(users);
         } catch (Exception e) {
             logger.error("接口异常" + e.getMessage());
         }
@@ -93,8 +97,8 @@ public class UserDaoTest {
     public void selectById() {
         try {
             User user = userDao.selectById(1);
+            assertNotNull(user);
             System.out.println(user);
-            logger.info("根据id查询客户信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据id查询客户信息DAO层接口异常" + e.getMessage());
         }
@@ -114,8 +118,10 @@ public class UserDaoTest {
             user.setEmail("12345678@qq.com");
             user.setStatus("有购房意向测试");
             user.setPayMoney(1234);
-            System.out.println(userDao.updateUser(user));
-            logger.info("修改客户信息DAO层接口正常");
+            int result = userDao.updateUser(user);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("修改客户信息DAO层接口异常" + e.getMessage());
         }
@@ -130,8 +136,9 @@ public class UserDaoTest {
     public void deleteById() {
         try {
             int result = userDao.deleteById(1);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("根据id删除客户DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据id删除客户DAO层接口异常" + e.getMessage());
         }
@@ -143,7 +150,11 @@ public class UserDaoTest {
      */
     @Test
     public void adminSelectLikeUsername() throws Exception {
-        System.out.println(userDao.adminSelectLikeUsername("%4%"));
+        List<User> users = userDao.adminSelectLikeUsername("%4%");
+        assertNotNull(users);
+        // List<User> users = userDao.adminSelectLikeUsername("%abcsd%");
+        // assertNull(users);
+        System.out.println(users);
     }
 
     /**
@@ -152,6 +163,10 @@ public class UserDaoTest {
      */
     @Test
     public void saleSelectLikeUsername() throws Exception {
-        System.out.println(userDao.saleSelectLikeUsername("%4%",4));
+        List<User> users = userDao.saleSelectLikeUsername("%4%",4);
+        assertNotNull(users);
+        // List<User> users = userDao.saleSelectLikeUsername("%abcsd%");
+        // assertNull(users);
+        System.out.println(users);
     }
 }

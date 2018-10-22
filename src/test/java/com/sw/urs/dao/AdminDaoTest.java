@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -41,8 +42,9 @@ public class AdminDaoTest {
             admin.setRid(2);
             admin.setStatus(0);
             int result = adminDao.addAdmin(admin);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("添加管理人员DAO层接口正常");
         } catch (Exception e) {
             logger.error("添加管理人员DAO层接口异常" + e.getMessage());
         }
@@ -54,8 +56,13 @@ public class AdminDaoTest {
     @Test
     public void selectAdmins() {
         try {
-            System.out.println(adminDao.selectAdmins());
-            logger.info("按id降序排列查询所有Admin DAO层接口正常");
+            List<Admin> admins = adminDao.selectAdmins();
+            assertNotNull(admins);
+            for (Admin admin : admins) {
+                assertNull(admin.getPassword());
+                assertNull(admin.getSalt());
+            }
+            System.out.println(admins);
         } catch (Exception e) {
             logger.error("按id降序排列查询所有Admin DAO层接口异常" + e.getMessage());
         }
@@ -68,8 +75,10 @@ public class AdminDaoTest {
     public void selectById() {
         try {
             Admin admin = adminDao.selectById(1);
+            assertNotNull(admin);
+            assertNull(admin.getPassword());
+            assertNull(admin.getSalt());
             System.out.println(admin);
-            logger.info("根据id查询管理人员信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据id查询管理人员信息DAO层接口异常" + e.getMessage());
         }
@@ -82,8 +91,10 @@ public class AdminDaoTest {
     public void selectByAdminName() {
         try {
             Admin admin = adminDao.selectByAdminName("测试");
+            assertNotNull(admin);
+            assertNull(admin.getPassword());
+            assertNull(admin.getSalt());
             System.out.println(admin);
-            logger.info("根据管理人员登录名查询管理人员信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据管理人员登录名查询管理人员信息DAO层接口异常" + e.getMessage());
         }
@@ -108,8 +119,9 @@ public class AdminDaoTest {
             admin.setRid(1);
             admin.setStatus(0);
             int result = adminDao.updateAdmin(admin);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("修改管理人员信息DAO层接口正常");
         } catch (Exception e) {
             logger.error("修改管理人员信息DAO层接口异常" + e.getMessage());
         }
@@ -121,8 +133,10 @@ public class AdminDaoTest {
     @Test
     public void updateStatus() {
         try {
-            System.out.println(adminDao.updateStatus(1,1));
-            logger.info("修改admin状态DAO层接口正常");
+            int result = adminDao.updateStatus(1,1);
+            assertNotNull(result);
+            assertEquals(1,result);
+            System.out.println(result);
         } catch (Exception e) {
             logger.error("修改admin状态DAO层接口异常" + e.getMessage());
         }
@@ -135,8 +149,9 @@ public class AdminDaoTest {
     public void deleteById() {
         try {
             int result = adminDao.deleteById(1);
+            assertNotNull(result);
+            assertEquals(1,result);
             System.out.println(result);
-            logger.info("根据id删除管理人员DAO层接口正常");
         } catch (Exception e) {
             logger.error("根据id删除管理人员DAO层接口异常" + e.getMessage());
         }
@@ -147,6 +162,9 @@ public class AdminDaoTest {
      */
     @Test
     public void selectForLogin() throws Exception {
-        System.out.println(adminDao.selectForLogin("984234055@qq.com"));
+        Admin admin = adminDao.selectForLogin("984234055@qq.com");
+        assertNotNull(admin.getPassword());
+        assertNotNull(admin.getSalt());
+        System.out.println(admin);
     }
 }
