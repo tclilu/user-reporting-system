@@ -4,10 +4,20 @@ package com.sw.urs.model;
  * 统计排名
  */
 public class Ranking {
+    // 排名（第几名）
+    private int position;
     // 排名的条件（例如：客户的数量，客户的消费总额）
     private String condition;
     // 销售的姓名（昵称）
     private String adminNickName;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public String getCondition() {
         return condition;

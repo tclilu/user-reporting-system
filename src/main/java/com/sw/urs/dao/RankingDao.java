@@ -3,7 +3,6 @@ package com.sw.urs.dao;
 import com.sw.urs.model.Ranking;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -77,7 +76,7 @@ public interface RankingDao {
             @Result(column = "user_count",property = "condition"),
             @Result(column = "nick_name",property = "adminNickName")
     })
-    List<Ranking> rankUserCountByDateRange(@Param("smallDate") Date smallDate,@Param("bigDate") Date bigDate);
+    List<Ranking> rankUserCountByDateRange(@Param("smallDate") String smallDate,@Param("bigDate") String bigDate);
 
     /**
      * 本周客户消费总金额排名
@@ -124,5 +123,5 @@ public interface RankingDao {
             @Result(column = "total_money",property = "condition"),
             @Result(column = "nick_name",property = "adminNickName")
     })
-    List<Ranking> rankUserPayByDateRange(@Param("smallDate") Date smallDate, @Param("bigDate") Date bigDate);
+    List<Ranking> rankUserPayByDateRange(@Param("smallDate") String smallDate, @Param("bigDate") String bigDate);
 }

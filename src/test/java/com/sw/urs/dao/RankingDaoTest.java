@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
-
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -76,7 +74,7 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserCountByDateRange() throws Exception {
-        System.out.println(rankingDao.rankUserCountByDateRange(new Date(),new Date()));
+        System.out.println(rankingDao.rankUserCountByDateRange("2018-10-18","2018-10-21"));
     }
 
     /**
@@ -85,6 +83,6 @@ public class RankingDaoTest {
      */
     @Test
     public void rankUserPayByDateRange() throws Exception {
-        System.out.println(rankingDao.rankUserPayByDateRange(new Date(),new Date()));
+        System.out.println(rankingDao.rankUserPayByDateRange("2018-10-18","2018-10-21"));
     }
 }

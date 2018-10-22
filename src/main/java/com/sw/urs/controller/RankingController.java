@@ -3,6 +3,7 @@ package com.sw.urs.controller;
 import com.sw.urs.model.MyResponse;
 import com.sw.urs.service.RankingService;
 import com.sw.urs.util.MyResponseUtil;
+import com.sw.urs.util.ValidDateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/admin/",produces = "application/json;charset=UTF-8")
@@ -70,10 +69,12 @@ public class RankingController {
      * @return
      */
     @RequestMapping(value = "/rankUserCountByDateRange",method = RequestMethod.GET)
-    public MyResponse rankUserCountByDateRange(@RequestParam("smallDate") Date smallDate,
-                                               @RequestParam("bigDate") Date bigDate) {
+    public MyResponse rankUserCountByDateRange(@RequestParam("smallDate") String smallDate,
+                                               @RequestParam("bigDate") String bigDate) {
         try {
-            System.out.println(smallDate);
+            if (!ValidDateUtil.isValidDate(smallDate,bigDate)) {
+                return MyResponseUtil.error("时间格式或日期范围不正确");
+            }
             return MyResponseUtil.success(rankingService.rankUserCountByDateRange(smallDate,bigDate));
         } catch (Exception e) {
             logger.error("排名系统异常" + e.getMessage());
@@ -130,9 +131,12 @@ public class RankingController {
      * @return
      */
     @RequestMapping(value = "/rankUserPayByDateRange",method = RequestMethod.GET)
-    public MyResponse rankUserPayByDateRange(@RequestParam("smallDate") Date smallDate,
-                                               @RequestParam("bigDate") Date bigDate) {
+    public MyResponse rankUserPayByDateRange(@RequestParam("smallDate") String smallDate,
+                                               @RequestParam("bigDate") String bigDate) {
         try {
+            if (!ValidDateUtil.isValidDate(smallDate,bigDate)) {
+                return MyResponseUtil.error("时间格式或日期范围不正确");
+            }
             return MyResponseUtil.success(rankingService.rankUserPayByDateRange(smallDate,bigDate));
         } catch (Exception e) {
             logger.error("排名系统异常" + e.getMessage());
