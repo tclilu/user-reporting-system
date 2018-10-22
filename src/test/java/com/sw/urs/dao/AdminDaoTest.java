@@ -141,4 +141,12 @@ public class AdminDaoTest {
             logger.error("根据id删除管理人员DAO层接口异常" + e.getMessage());
         }
     }
+
+    /**
+     * 登录验证查询
+     */
+    @Test
+    public void selectForLogin() throws Exception {
+        System.out.println(adminDao.selectForLogin("984234055@qq.com"));
+    }
 }

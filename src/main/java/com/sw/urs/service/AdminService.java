@@ -67,7 +67,7 @@ public class AdminService {
         if (adminName.isEmpty() || password.isEmpty()) {
             throw new MyResponseException(ResponseCode.PARAMS_ERROR);
         }
-        Admin admin = adminDao.selectByAdminName(adminName);
+        Admin admin = adminDao.selectForLogin(adminName);
         // 登录名不存在
         if (admin == null) {
             throw new MyResponseException(ResponseCode.ADMIN_NAME_ERROR);

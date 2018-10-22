@@ -9,7 +9,8 @@ import java.util.List;
 public interface AdminDao {
     String TABLE_NAME = " admin ";
     String INSERT_FIELDS = " admin_name,password,salt,nick_name,tel,avatar,add_time,rid,status ";
-    String SELECT_FIELDS = " id, " + INSERT_FIELDS;
+    String CHECK_LOGIN_FIELDS = " id, " + INSERT_FIELDS;
+    String SELECT_FIELDS = " id,admin_name,nick_name,tel,avatar,add_time,rid,status ";
 
     /**
      * 添加管理人员
@@ -19,6 +20,14 @@ public interface AdminDao {
     @Insert({"insert into ",TABLE_NAME,"(",INSERT_FIELDS,
             ") values(#{adminName},#{password},#{salt},#{nickName},#{tel},#{avatar},#{addTime},#{rid},#{status})"})
     int addAdmin(Admin admin);
+
+    /**
+     * 登录验证查询
+     * @param adminName
+     * @return
+     */
+    @Select({"select ",CHECK_LOGIN_FIELDS," from ",TABLE_NAME," where admin_name=#{adminName}"})
+    Admin selectForLogin(String adminName);
 
     /**
      * 按id降序排列查询所有Admin
@@ -33,6 +42,16 @@ public interface AdminDao {
      * @return
      */
     @Select({"select ",SELECT_FIELDS," from ",TABLE_NAME," where id=#{id}"})
+    @Results({
+            @Result(id = true,column = "id",property = "id"),
+            @Result(column = "admin_name",property = "adminName"),
+            @Result(column = "nick_name",property = "nickName"),
+            @Result(column = "tel",property = "tel"),
+            @Result(column = "avatar",property = "avatar"),
+            @Result(column = "add_time",property = "addTime"),
+            @Result(column = "rid",property = "rid"),
+            @Result(column = "status",property = "status"),
+    })
     Admin selectById(int id);
 
     /**
